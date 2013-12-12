@@ -1,0 +1,5 @@
+class PopulatesController < ApplicationController
+
+  
+
+end
