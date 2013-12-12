@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212054516) do
+ActiveRecord::Schema.define(:version => 20131212064204) do
 
   create_table "classes", :force => true do |t|
     t.integer  "course_id"
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20131212054516) do
   create_table "timeslots", :force => true do |t|
     t.string "day"
     t.time   "start_time"
-    t.time   "end_time"
   end
 
 end
