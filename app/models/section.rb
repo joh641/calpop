@@ -18,9 +18,11 @@ class Section < ActiveRecord::Base
     days.split("").each do
       # if is day
       times.each do
-        Timeslot.make_timeslot(#day, start)
+        self.timeslots << Timeslot.make_timeslot(#day, start)
       end
     end
+    self.last_updated = DateTime.now
+    self.save
   end
     
     
