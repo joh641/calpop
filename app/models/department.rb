@@ -29,11 +29,12 @@ class Department < ActiveRecord::Base
     begin
       courses = doc.xpath("//CanonicalCourse")
       courses.each do |course|
-        name = self.name + " " + course.xpath("/courseNumber").text
+        course_number = course.xpath("/courseNumber").text
         course_uid = course.xpath("/courseUID").text
         self.courses << Course.make_course(name, course_uid)
       end
-      last_updated = DateTime.now
+      self.last_updated = DateTime.now
+      self.save
     rescue => e
     end
   end
