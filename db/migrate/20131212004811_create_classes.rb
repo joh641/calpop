@@ -7,5 +7,6 @@ class CreateClasses < ActiveRecord::Migration
       t.string :semester
       t.integer :year
       t.datetime :last_updated
+    end
   end
 end
