@@ -7,12 +7,12 @@ class Section < ActiveRecord::Base
 
   # makes section from the given input, then updates the timeslots occupied by the section
   def self.make_section(building, population, days, start_time, end_time)
-      section = Section.new
-      section.building = building
-      section.population = population
-      section.save
-      section.update_timeslots(days, start_time, end_time)
-      return section
+    section = Section.new
+    section.building = building
+    section.population = population
+    section.save
+    section.update_timeslots(days, start_time, end_time)
+    return section
   end
 
   def update_section(population, days, start_time, end_time)
