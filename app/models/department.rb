@@ -8,20 +8,28 @@ class Department < ActiveRecord::Base
   @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
+
   def self.make_department(department_name)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/department?departmentName=#{CGI.escape(department_name)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
       doc = call_api(uri)
       department_name = doc.xpath("//departmentName").text
       department_code = doc.xpath("//departmentCode").text
-      department = Department.new
-      department.name = department_name
-      department.department_code = department_code
-      department.save
-      department.update_courses
+      department = find_department(department_code)
+      if not department
+        department = Department.new
+        department.name = department_name
+        department.department_code = department_code
+        department.save
+        department.update_courses
+      end
       return department
     rescue => e
     end
+  end
+
+  def self.find_department(department_code)
+    find_by_department_code(department_code)
   end
 
   def update_courses
