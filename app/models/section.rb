@@ -6,18 +6,30 @@ class Section < ActiveRecord::Base
   has_and_belongs_to_many :timeslots
 
   # makes section from the given input, then updates the timeslots occupied by the section
-  def self.make_section(building, population, days, start_time, end_time)
-    section = Section.new
-    section.building = building
-    section.population = population
-    section.save
+  def self.make_section(building, population, days, start_time, end_time, classinstance)
+    section = find_section(building, classinstance)
+    if not section
+      section = Section.new
+      section.building = building
+      section.population = population
+      section.save
+    else
+      section.update_population(population)
+    end
     section.update_timeslots(days, start_time, end_time)
     return section
   end
 
-  def update_section(population, days, start_time, end_time)
+  def self.find_section(building, classinstance)
+    self.where("building = ?", building).each do |section|
+      if section.classinstance == classinstance 
+        return section
+      end
+    end
+  end
+
+  def update_population(population)
     self.population = population
-    update_timeslots(days, start_time, end_time)
   end
 
   def get_section_population

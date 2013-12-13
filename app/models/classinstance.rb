@@ -44,7 +44,7 @@ class Classinstance < ActiveRecord::Base
           start_time = section.xpath("startTime").text
           end_time = section.xpath("endTime").text
           i+=1
-          self.sections << Section.make_section(building, population, days, start_time, end_time)
+          self.sections << Section.make_section(building, population, days, start_time, end_time, self)
         rescue => e
           i+=1
           next
