@@ -17,6 +17,6 @@ Sections
         %td= section.get_section_population
         %td
           - section.timeslots.each do |timeslot|
-            %li= timeslot.day + " " + timeslot.start_time.to_s
+            %li= timeslot.day + " " + timeslot.start_time.strftime("%I:%M%p")
 
 = link_to "Update", classinstance_path(@classinstance), :method => :put
