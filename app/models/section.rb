@@ -12,9 +12,9 @@ class Section < ActiveRecord::Base
       section.building = building
       section.population = population
       section.save
-      section.update_timeslots(days, start_time, end_time)
     else
       section.update_population(population)
+      section.update_timeslots(days, start_time, end_time)
     end
     return section
   end
