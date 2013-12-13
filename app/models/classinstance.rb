@@ -42,10 +42,11 @@ class Classinstance < ActiveRecord::Base
           start_time = section.xpath("startTime").text
           end_time = section.xpath("endTime").text
           self.sections << Section.make_section(building, population, days, start_time, end_time)
+          i+=1
         rescue => e
+          i+=1
           next
         end
-        i += 1
       end
       self.last_updated = DateTime.now
       self.save
