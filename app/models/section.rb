@@ -50,7 +50,7 @@ class Section < ActiveRecord::Base
 
   def contains_timeslot?(day, time)
     self.timeslots.each do |timeslot|
-      if timeslot.day == day and timeslot.start_time == time
+      if timeslot.day == day and timeslot.start_time.strftime("%I%M").to_i == time % 1200
         return true
       end
     end
