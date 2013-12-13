@@ -33,7 +33,7 @@ class Department < ActiveRecord::Base
   end
 
   def update_courses
-    uri = "https://apis-dev.berkeley.edu/cxf/asws/course?departmentCode=#{self.department_code}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    uri = "https://apis-dev.berkeley.edu/cxf/asws/course?departmentCode=#{CGI.escape(self.department_code)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
       doc = Department.call_api(uri)
       courses = doc.xpath("//CanonicalCourse")
