@@ -24,8 +24,8 @@ module AdditionalMethods
 
     # splits into half hour time chunks from start to end
     def split_times(start_time, end_time)
-      start_int = start_time.gsub("3","5").to_i
-      end_int = end_time[0,4].gsub("3","5").to_i 
+      start_int = start_time.gsub(/30$/,"50").to_i
+      end_int = end_time[0,4].gsub(/30$/,"50").to_i 
       end_period = end_time[-2] + end_time[-1]
       time_frame = []
       if end_period == "PM"
@@ -37,7 +37,7 @@ module AdditionalMethods
         end
       end
       while (start_int < end_int)
-          time_frame.push(start_int.to_s.gsub("5","3").to_i)
+          time_frame.push(start_int.to_s.gsub(/50$/,"30").to_i)
           start_int += 50
       end  
       return time_frame
