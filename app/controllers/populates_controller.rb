@@ -10,7 +10,7 @@ class PopulatesController < ApplicationController
   private
 
   def add(query)
-    Department.make_department(query)
+    Department.make_department(query, true)
   end
 
 end

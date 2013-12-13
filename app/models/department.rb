@@ -9,7 +9,7 @@ class Department < ActiveRecord::Base
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
 
-  def self.make_department(department_name)
+  def self.make_department(department_name, query= false)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/department?departmentName=#{CGI.escape(department_name)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
       doc = call_api(uri)
@@ -22,7 +22,7 @@ class Department < ActiveRecord::Base
         department.department_code = department_code
         department.save
       end
-      department.update_courses
+      department.update_courses if not query
       return department
     rescue => e
     end
