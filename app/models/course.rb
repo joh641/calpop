@@ -27,7 +27,7 @@ class Course < ActiveRecord::Base
   def update_classes(department_code)
     semester = Course.find_semester(Date.today)
     year = Date.today.year
-    uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering?courseNumber=#{self.course_number}&departmentCode=#{department_code}&term=#{semester}&termYear=#{year}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering?courseNumber=#{self.course_number}&departmentCode=#{CGI.escape(department_code)}&term=#{semester}&termYear=#{year}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
       doc = Course.call_api(uri)
       classes = doc.xpath("//ClassOffering")
