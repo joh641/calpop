@@ -35,13 +35,17 @@ class Classinstance < ActiveRecord::Base
       holder = doc.xpath("//sections")
       i = 0
       sections.each do |section|
-        building = section.xpath("building").text
-        population = holder[i].xpath("studentsEnrolled").text.to_i + holder[i].xpath("waitlistSize").text.to_i
-        days = section.xpath("meetingDay").text
-        start_time = section.xpath("startTime").text
-        end_time = section.xpath("endTime").text
+        begin
+          building = section.xpath("building").text
+          population = holder[i].xpath("studentsEnrolled").text.to_i + holder[i].xpath("waitlistSize").text.to_i
+          days = section.xpath("meetingDay").text
+          start_time = section.xpath("startTime").text
+          end_time = section.xpath("endTime").text
+          self.sections << Section.make_section(building, population, days, start_time, end_time)
+        rescue => e
+          next
+        end
         i += 1
-        self.sections << Section.make_section(building, population, days, start_time, end_time)
       end
       self.last_updated = DateTime.now
       self.save
