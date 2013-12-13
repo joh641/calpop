@@ -1,4 +1,4 @@
-class ClassInstance < ActiveRecord::Base
+class Classinstance < ActiveRecord::Base
   
   include AdditionalMethods
 
@@ -10,7 +10,7 @@ class ClassInstance < ActiveRecord::Base
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
   def self.make_class(name, class_uid, semester, year)
-    this_class = ClassInstance.new
+    this_class = Classinstance.new
     this_class.name = name
     this_class.class_uid = class_uid
     this_class.semester = semester
@@ -22,8 +22,8 @@ class ClassInstance < ActiveRecord::Base
 
   def update_sections
     uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering/#{CGI.escape(self.class_uid)}?_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
-    doc = call_api(uri)
     begin
+      doc = Classinstance.call_api(uri)
       sections = doc.xpath("//sections").xpath("//sectionMeetings")
       holder = doc.xpath("//sections")
       i = 0

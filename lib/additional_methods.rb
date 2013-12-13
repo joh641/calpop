@@ -12,14 +12,13 @@ module AdditionalMethods
     
     # finds the semester based on date
     def find_semester(date)
-      month = date.month
-      day = date.day
-      if month >= 8 and day >= 15
-        "Fall"
-      elsif month >= 5 and day >= 20
+      year = date.year
+      if (Date.new(year,1,1)..Date.new(year,5,15)).cover?(date)
+        "Spring"
+      elsif (Date.new(year,5,16)..Date.new(year,8,19)).cover?(date)
         "Summer"
       else
-        "Spring"
+        "Fall"
       end
     end
 

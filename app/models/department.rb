@@ -10,8 +10,8 @@ class Department < ActiveRecord::Base
 
   def self.make_department(department_name)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/department?departmentName=#{CGI.escape(department_name)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
-    doc = call_api(uri)
     begin
+      doc = call_api(uri)
       department_name = doc.xpath("//departmentName").text
       department_code = doc.xpath("//departmentCode").text
       department = Department.new
@@ -25,15 +25,14 @@ class Department < ActiveRecord::Base
   end
 
   def update_courses
-    sleep(10)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/course?departmentCode=#{self.department_code}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
-    doc = call_api(uri)
     begin
+      doc = Department.call_api(uri)
       courses = doc.xpath("//CanonicalCourse")
       courses.each do |course|
         course_number = course.xpath("courseNumber").text
         course_uid = course.xpath("courseUID").text
-        self.courses << Course.make_course(course_number, course_uid)
+        self.courses << Course.make_course(course_number, course_uid, self.department_code)
       end
       self.last_updated = DateTime.now
       self.save

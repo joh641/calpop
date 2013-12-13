@@ -15,7 +15,7 @@ class Section < ActiveRecord::Base
   end
 
   def update_timeslots(days, start_time, end_time)
-    times = split_times(start_time, end_time)
+    times = Section.split_times(start_time, end_time)
     day_abbs = ["S", "M", "T", "W", "T", "F", "S"]
     day_full = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     i = 0
