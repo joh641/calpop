@@ -38,6 +38,7 @@ module AdditionalMethods
           time_frame.push(start_int)
           start_int += 50
       end  
+      return time_frame
     end
   end
   def self.included(receiver)

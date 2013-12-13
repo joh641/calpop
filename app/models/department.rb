@@ -32,7 +32,11 @@ class Department < ActiveRecord::Base
       courses.each do |course|
         course_number = course.xpath("courseNumber").text
         course_uid = course.xpath("courseUID").text
-        self.courses << Course.make_course(course_number, course_uid, self.department_code)
+        begin
+          self.courses << Course.make_course(course_number, course_uid, self.department_code)
+        rescue => e
+          next
+        end
       end
       self.last_updated = DateTime.now
       self.save

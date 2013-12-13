@@ -26,8 +26,12 @@ class Course < ActiveRecord::Base
       classes = doc.xpath("//ClassOffering")
       classes.each do |class_offering|
         name = class_offering.xpath("courseTitle").text
-        class_uid = class_offering.xpath("classUID").text
-        self.classes << Classinstance.make_class(name, class_uid, semester, year)
+        class_uid = CGI.escape(class_offering.xpath("classUID").text)
+        begin
+          self.classinstances << Classinstance.make_class(name, class_uid, semester, year)
+        rescue => e
+          next
+        end
       end
       self.last_updated = DateTime.now
       self.save
