@@ -21,11 +21,10 @@ class Classinstance < ActiveRecord::Base
   end
 
   def update_sections
-    uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering/#{self.class_uid}?_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering/#{self.class_uid.gsub(" ", "%20")}?_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
       doc = Classinstance.call_api(uri)
       sections = doc.xpath("//sections").xpath("//sectionMeetings")
-      puts sections
       holder = doc.xpath("//sections")
       i = 0
       sections.each do |section|
@@ -34,11 +33,6 @@ class Classinstance < ActiveRecord::Base
         days = section.xpath("meetingDay").text
         start_time = section.xpath("startTime").text
         end_time = section.xpath("endTime").text
-        puts building
-        puts population
-        puts days
-        puts start_time
-        puts end_time
         i += 1
         self.sections << Section.make_section(building, population, days, start_time, end_time)
       end
