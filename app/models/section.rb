@@ -39,7 +39,7 @@ class Section < ActiveRecord::Base
     days.split("").each do |char|
       if char == day_abbs[i]
         times.each do |time|
-          self.timeslots << Timeslot.make_timeslot(day_full[i], time)
+          self.timeslots << Timeslot.make_timeslot(day_full[i], time) if not contains_timeslot?(day_full[i], time)
         end
       end
       i += 1
@@ -47,5 +47,14 @@ class Section < ActiveRecord::Base
     self.last_updated = DateTime.now
     self.save
   end    
+
+  def contains_timeslot?(day, time)
+    self.timeslots.each do |timeslot|
+      if timeslot.day == day and timeslot.start_time == time
+        return true
+      end
+    end
+    return false
+  end
     
 end
