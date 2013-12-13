@@ -10,14 +10,21 @@ class Classinstance < ActiveRecord::Base
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
   def self.make_class(name, class_uid, semester, year)
-    this_class = Classinstance.new
-    this_class.name = name
-    this_class.class_uid = class_uid
-    this_class.semester = semester
-    this_class.year = year
-    this_class.save
-    this_class.update_sections
+    this_class = find_class(class_uid)
+    if not this_class
+      this_class = Classinstance.new
+      this_class.name = name
+      this_class.class_uid = class_uid
+      this_class.semester = semester
+      this_class.year = year
+      this_class.save
+      this_class.update_sections
+    end
     return this_class
+  end
+
+  def self.find_class(class_uid)
+    self.find_by_class_uid(class_uid)
   end
 
   def update_sections

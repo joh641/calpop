@@ -9,12 +9,19 @@ class Course < ActiveRecord::Base
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
   def self.make_course(course_number, course_uid, department_code)
-    course = Course.new
-    course.course_number = course_number
-    course.course_uid = course_uid
-    course.save
-    course.update_classes(department_code)
+    course = find_course(course_uid)
+    if not course
+      course = Course.new
+      course.course_number = course_number
+      course.course_uid = course_uid
+      course.save
+      course.update_classes(department_code)
+    end
     return course
+  end
+
+  def self.find_course(course_uid)
+    self.find_by_course_uid(course_uid)
   end
 
   def update_classes(department_code)

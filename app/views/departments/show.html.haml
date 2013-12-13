@@ -16,3 +16,5 @@
         %td
           - course.classinstances.each do |classinstance|
             %li= classinstance.get_class_population
+
+= link_to "Update", department_path(@department), :method => :put

@@ -1,7 +1,8 @@
 = @classinstance.class_uid
 %br
 = @classinstance.name
-
+%br
+%br
 Sections
 %table
   %thead
@@ -17,3 +18,5 @@ Sections
         %td
           - section.timeslots.each do |timeslot|
             %li= timeslot.day + " " + timeslot.start_time.to_s
+
+= link_to "Update", classinstance_path(@classinstance), :method => :put
