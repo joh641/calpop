@@ -1,7 +1,3 @@
-require 'open-uri'
-require 'cgi'
-require 'nokogiri'
-
 module AdditionalMethods
   module ClassMethods
     # makes the API call and returns the XML response for parsing
