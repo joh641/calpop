@@ -2,6 +2,7 @@ Calpop::Application.routes.draw do
 
   resource :populate
   resources :departments
+  resources :courses
   resources :classinstances
   resources :sections
   resources :timeslots

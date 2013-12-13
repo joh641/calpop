@@ -37,7 +37,7 @@ module AdditionalMethods
         end
       end
       while (start_int < end_int)
-          time_frame.push(start_int.gsub("5","3"))
+          time_frame.push(start_int.to_s.gsub("5","3").to_i)
           start_int += 50
       end  
       return time_frame

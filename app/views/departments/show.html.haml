@@ -6,6 +6,7 @@
       %th Course Number
       %th Class Instances
       %th Population
+      %th 
   %tbody
     - @department.courses.each do |course|
       %tr
@@ -16,5 +17,6 @@
         %td
           - course.classinstances.each do |classinstance|
             %li= classinstance.get_class_population
+        %td= link_to "Update", course_path(course), :method => :put
 
 = link_to "Update", department_path(@department), :method => :put

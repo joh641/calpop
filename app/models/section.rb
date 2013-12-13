@@ -6,7 +6,7 @@ class Section < ActiveRecord::Base
   has_and_belongs_to_many :timeslots
 
   def self.make_section(building, population, days, start_time, end_time)
-    section = find_section(building, start_time, end_time)
+    section = find_section(building, population)
     if not section
       section = Section.new
       section.building = building
@@ -19,8 +19,8 @@ class Section < ActiveRecord::Base
     return section
   end
 
-  def self.find_section
-    self.find_by_building_and_start_time_and_end_time(building, start_time, end_time)
+  def self.find_section(building, population)
+    self.find_by_building_and_population(building, population)
   end
 
   def update_population(population)

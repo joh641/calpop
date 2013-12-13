@@ -13,7 +13,7 @@ class Timeslot < ActiveRecord::Base
     return timeslot
   end
 
-  def find_timeslot(day, start_time)
+  def self.find_timeslot(day, start_time)
     self.find_by_day_and_start_time(day, start_time)
   end
 
