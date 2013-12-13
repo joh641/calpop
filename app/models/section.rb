@@ -15,15 +15,19 @@ class Section < ActiveRecord::Base
 
   def update_timeslots(days, start_time, end_time)
     times = split_times(start_time, end_time)
-    days.split("").each do
-      # if is day
-      times.each do
-        self.timeslots << Timeslot.make_timeslot(#day, start)
+    day_abbs = ["S", "M", "T", "W", "T", "F", "S"]
+    day_full = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    i = 0
+    days.split("").each do |char|
+      if char == day_abbs[i]
+        times.each do |time|
+          self.timeslots << Timeslot.make_timeslot(day_full[i], time)
+        end
       end
+      i += 1
     end
     self.last_updated = DateTime.now
     self.save
-  end
-    
+  end    
     
 end
