@@ -1,4 +1,4 @@
-class Class < ActiveRecord::Base
+class ClassInstance < ActiveRecord::Base
   
   include AdditionalMethods
 
@@ -6,17 +6,18 @@ class Class < ActiveRecord::Base
   has_many :sections
   has_many :timeslots, :through => :sections
 
-  @@app_id = ENV['STUDENT+INFORMATION_APP_ID']
+  @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
   def self.make_class(name, class_uid, semester, year)
-    this_class = Class.new
+    this_class = ClassInstance.new
     this_class.name = name
     this_class.class_uid = class_uid
     this_class.semester = semester
     this_class.year = year
     this_class.save
     this_class.update_sections
+    return this_class
   end
 
   def update_sections

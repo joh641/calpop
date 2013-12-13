@@ -2,7 +2,7 @@ class Section < ActiveRecord::Base
 
   include AdditionalMethods
 
-  belongs_to :class
+  belongs_to :classinstance
   has_and_belongs_to_many :timeslots
 
   def self.make_section(building, population, days, start_time, end_time)
@@ -11,6 +11,7 @@ class Section < ActiveRecord::Base
     section.population = population
     section.save
     section.update_timeslots(days, start_time, end_time)
+    return section
   end
 
   def update_timeslots(days, start_time, end_time)

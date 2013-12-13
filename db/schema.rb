@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212064204) do
+ActiveRecord::Schema.define(:version => 20131213043940) do
 
-  create_table "classes", :force => true do |t|
+  create_table "classinstances", :force => true do |t|
     t.integer  "course_id"
     t.string   "name"
     t.string   "class_uid"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20131212064204) do
   end
 
   create_table "sections", :force => true do |t|
-    t.integer  "class_id"
+    t.integer  "classinstance_id"
     t.integer  "timeslot_id"
     t.string   "building"
     t.integer  "population"

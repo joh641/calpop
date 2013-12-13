@@ -3,7 +3,7 @@ class Course < ActiveRecord::Base
   include AdditionalMethods
 
   belongs_to :department
-  has_many :classes
+  has_many :classinstances
 
   @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
@@ -14,6 +14,7 @@ class Course < ActiveRecord::Base
     course.course_uid = course_uid
     course.save
     course.update_classes
+    return course
   end
 
   def update_classes
@@ -26,7 +27,7 @@ class Course < ActiveRecord::Base
       classes.each do |class_offering|
         name = class_offering.xpath("courseTitle").text
         class_uid = class_offering.xpath("classUID").text
-        self.classes << Class.make_class(name, class_uid, semester, year)
+        self.classes << ClassInstance.make_class(name, class_uid, semester, year)
       end
       self.last_updated = DateTime.now
       self.save

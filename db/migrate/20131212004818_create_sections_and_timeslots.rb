@@ -1,7 +1,7 @@
 class CreateSectionsAndTimeslots < ActiveRecord::Migration
   def change
     create_table :sections do |t|
-      t.integer :class_id
+      t.integer :classinstance_id
       t.integer :timeslot_id
       t.string :building
       t.integer :population

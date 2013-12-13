@@ -7,6 +7,7 @@ class Timeslot < ActiveRecord::Base
     timeslot.day = day
     timeslot.start_time = start_time
     timeslot.save
+    return timeslot
   end
 
 end

@@ -1,6 +1,6 @@
-class CreateClasses < ActiveRecord::Migration
+class CreateClassInstances < ActiveRecord::Migration
   def change
-    create_table :classes do |t|
+    create_table :classinstances do |t|
       t.integer :course_id
       t.string :name
       t.string :class_uid
