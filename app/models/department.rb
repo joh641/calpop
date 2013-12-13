@@ -1,6 +1,6 @@
 class Department < ActiveRecord::Base
 
-  include APICaller
+  include AdditionalMethods
 
   has_many :courses
   has_many :classes, :through => :courses
@@ -29,8 +29,8 @@ class Department < ActiveRecord::Base
     begin
       courses = doc.xpath("//CanonicalCourse")
       courses.each do |course|
-        course_number = course.xpath("/courseNumber").text
-        course_uid = course.xpath("/courseUID").text
+        course_number = course.xpath("courseNumber").text
+        course_uid = course.xpath("courseUID").text
         self.courses << Course.make_course(name, course_uid)
       end
       self.last_updated = DateTime.now

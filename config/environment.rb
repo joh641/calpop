@@ -6,3 +6,4 @@ load(environment_variables) if File.exists?(environment_variables)
 
 # Initialize the rails application
 Calpop::Application.initialize!
+

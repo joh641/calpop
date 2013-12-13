@@ -1,7 +1,6 @@
 class Course < ActiveRecord::Base
 
-  include APICaller
-  include FindSemester
+  include AdditionalMethods
 
   belongs_to :department
   has_many :classes
@@ -25,8 +24,8 @@ class Course < ActiveRecord::Base
     begin
       classes = doc.xpath("//ClassOffering")
       classes.each do |class_offering|
-        name = class_offering.xpath("/courseTitle").text
-        class_uid = class_offering.xpath("/classUID").text
+        name = class_offering.xpath("courseTitle").text
+        class_uid = class_offering.xpath("classUID").text
         self.classes << Class.make_class(name, class_uid, semester, year)
       end
       self.last_updated = DateTime.now

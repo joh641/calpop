@@ -1,6 +1,6 @@
 class Section < ActiveRecord::Base
 
-  include SplitTimes
+  include AdditionalMethods
 
   belongs_to :class
   has_and_belongs_to_many :timeslots
