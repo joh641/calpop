@@ -8,7 +8,7 @@ class Department < ActiveRecord::Base
   @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
-
+  # takes a department's name and make a call to find the department's code
   def self.make_department(department_name, query= false)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/department?departmentName=#{CGI.escape(department_name)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
@@ -39,6 +39,7 @@ class Department < ActiveRecord::Base
     self.find_by_department_code(department_code) or self.find_by_name(department_name)
   end
 
+  # uses department's code to search for the courses offered by that department, then adds those courses to the department
   def update_courses
     uri = "https://apis-dev.berkeley.edu/cxf/asws/course?departmentCode=#{CGI.escape(self.department_code)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin

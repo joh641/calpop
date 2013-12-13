@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
+  # makes course from given inputs, then updates the class offerings for that course for the current semester 
   def self.make_course(course_number, course_uid, department_code)
     course = find_course(course_uid)
     if not course
@@ -24,6 +25,7 @@ class Course < ActiveRecord::Base
     self.find_by_course_uid(course_uid)
   end
 
+  # uses the course uid and the current semester to find the class offerings for that course and add it to that course
   def update_classes(department_code)
     semester = Course.find_semester(Date.today)
     year = Date.today.year

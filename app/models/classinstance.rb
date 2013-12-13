@@ -9,6 +9,7 @@ class Classinstance < ActiveRecord::Base
   @@app_id = ENV['STUDENT_INFORMATION_APP_ID']
   @@app_key = ENV['STUDENT_INFORMATION_APP_KEY']
 
+  # makes a class with the given inputs, then updates the sections offered for that class
   def self.make_class(name, class_uid, semester, year)
     this_class = find_class(class_uid)
     if not this_class
@@ -27,6 +28,7 @@ class Classinstance < ActiveRecord::Base
     self.find_by_class_uid(class_uid)
   end
 
+  # uses the class_uid to find the sections offered for that class, then adds them to the class
   def update_sections
     uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering/#{self.class_uid.gsub(" ", "%20")}?_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
     begin
@@ -41,8 +43,8 @@ class Classinstance < ActiveRecord::Base
           days = section.xpath("meetingDay").text
           start_time = section.xpath("startTime").text
           end_time = section.xpath("endTime").text
-          self.sections << Section.make_section(building, population, days, start_time, end_time)
           i+=1
+          self.sections << Section.make_section(building, population, days, start_time, end_time)
         rescue => e
           i+=1
           next
