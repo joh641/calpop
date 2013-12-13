@@ -21,8 +21,8 @@ class Department < ActiveRecord::Base
         department.name = department_name
         department.department_code = department_code
         department.save
-        department.update_courses
       end
+      department.update_courses
       return department
     rescue => e
     end

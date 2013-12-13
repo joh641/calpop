@@ -18,8 +18,8 @@ class Classinstance < ActiveRecord::Base
       this_class.semester = semester
       this_class.year = year
       this_class.save
-      this_class.update_sections
     end
+    this_class.update_sections
     return this_class
   end
 

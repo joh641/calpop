@@ -15,8 +15,8 @@ class Course < ActiveRecord::Base
       course.course_number = course_number
       course.course_uid = course_uid
       course.save
-      course.update_classes(department_code)
     end
+    course.update_classes(department_code)
     return course
   end
 
