@@ -29,7 +29,7 @@ class Department < ActiveRecord::Base
   end
 
   def self.find_department(department_code)
-    find_by_department_code(department_code)
+    self.find_by_department_code(department_code)
   end
 
   def update_courses
@@ -50,6 +50,14 @@ class Department < ActiveRecord::Base
       self.save
     rescue => e
     end
+  end
+
+  def get_department_population
+    population = 0
+    self.classinstances.each do |classinstance|
+      population += classinstance.get_class_population
+    end
+    population
   end
 
 end

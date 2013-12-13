@@ -14,6 +14,10 @@ class Section < ActiveRecord::Base
     return section
   end
 
+  def get_section_population
+    self.population
+  end
+
   def update_timeslots(days, start_time, end_time)
     times = Section.split_times(start_time, end_time)
     day_abbs = ["S", "M", "T", "W", "T", "F", "S"]

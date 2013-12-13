@@ -1,0 +1,18 @@
+= @department.name
+
+%table
+  %thead
+    %tr
+      %th Course Number
+      %th Class Instances
+      %th Population
+  %tbody
+    - @department.courses.each do |course|
+      %tr
+        %td= course.course_number
+        %td
+          - course.classinstances.each do |classinstance|
+            %li= link_to "#{classinstance.class_uid}", classinstance_path(classinstance)
+        %td
+          - course.classinstances.each do |classinstance|
+            %li= classinstance.get_class_population

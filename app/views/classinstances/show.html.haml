@@ -1,0 +1,19 @@
+= @classinstance.class_uid
+%br
+= @classinstance.name
+
+Sections
+%table
+  %thead
+    %tr
+      %th Building
+      %th Population
+      %th Timeslots
+  %tbody
+    - @classinstance.sections.each do |section|
+      %tr
+        %td= section.building
+        %td= section.get_section_population
+        %td
+          - section.timeslots.each do |timeslot|
+            %li= timeslot.day + " " + timeslot.start_time.to_s

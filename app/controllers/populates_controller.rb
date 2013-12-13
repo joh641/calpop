@@ -1,6 +1,7 @@
 class PopulatesController < ApplicationController
 
   def show
+    @departments = Department.all
     if params[:query]
       add(params[:query])
     end

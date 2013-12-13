@@ -1,3 +1,14 @@
+%table
+  %thead
+    %tr
+      %th Department
+      %th Population
+  %tbody
+    - @departments.each do |department|
+      %tr
+        %td= link_to "#{department.name}", department_path(department)
+        %td= department.get_department_population
+
 = form_tag populate_path, :method => :get do
   = label_tag :query
   = text_field_tag :query

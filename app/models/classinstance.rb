@@ -42,4 +42,12 @@ class Classinstance < ActiveRecord::Base
     end
   end
 
+  def get_class_population
+    population = 0
+    self.sections.each do |section|
+      population += section.get_section_population
+    end
+    population
+  end
+
 end
