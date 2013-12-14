@@ -7,7 +7,7 @@ class Section < ActiveRecord::Base
 
   # makes section from the given input, then updates the timeslots occupied by the section
   def self.make_section(building, population, days, start_time, end_time, classinstance)
-    section = self.find_section(building, classinstance)
+    section = find_section(building, classinstance)
     if not section
       section = Section.new
       section.building = building
@@ -19,7 +19,7 @@ class Section < ActiveRecord::Base
     begin
       section.update_timeslots(days, start_time, end_time)
     rescue => e
-      puts e.message
+      puts "error in timeslot creation: " + e.message
     end
     return section
   end
