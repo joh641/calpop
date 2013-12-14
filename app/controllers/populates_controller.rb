@@ -1,4 +1,5 @@
 class PopulatesController < ApplicationController
+  respond_to :json
 
   def show
     @departments = Department.all
