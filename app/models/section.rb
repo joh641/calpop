@@ -39,7 +39,7 @@ class Section < ActiveRecord::Base
   end
 
   def get_section_population
-    self.population
+    self.population + 1
   end
 
   # determines which timeslots the section occupies from the given day, start time, and end time, then adds them to that section
