@@ -15,7 +15,7 @@ class Timeslot < ActiveRecord::Base
   end
 
   def self.find_timeslot(day, start_time)
-    self.where("day = ?", day).where("start_time = ?", Time.strptime(start_time.to_s, "%H%M"))
+    self.where("day = ?", day).where("start_time = ?", Time.strptime(start_time.to_s, "%H%M")).first
   end
 
   def find_buildings
