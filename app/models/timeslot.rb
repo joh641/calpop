@@ -6,7 +6,7 @@ class Timeslot < ActiveRecord::Base
   def self.make_timeslot(day, start_time)
     timeslot = Timeslot.new
     timeslot.day = day
-    timeslot.start_time = start_time
+    timeslot.start_time = Time.strptime(start_time.to_s, "%H%M")
     timeslot.save
     return timeslot
   end
