@@ -11,6 +11,7 @@ class Department < ActiveRecord::Base
   # takes a department's name and make a call to find the department's code
   def self.make_department(department_name, query= false)
     uri = "https://apis-dev.berkeley.edu/cxf/asws/department?departmentName=#{CGI.escape(department_name)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    puts uri
     begin
       doc = call_api(uri)
       departments = doc.xpath("//CanonicalDepartment")
@@ -44,6 +45,7 @@ class Department < ActiveRecord::Base
   # uses department's code to search for the courses offered by that department, then adds those courses to the department
   def update_courses
     uri = "https://apis-dev.berkeley.edu/cxf/asws/course?departmentCode=#{CGI.escape(self.department_code)}&_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    puts uri
     begin
       doc = Department.call_api(uri)
       courses = doc.xpath("//CanonicalCourse")
