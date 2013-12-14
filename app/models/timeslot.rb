@@ -18,4 +18,21 @@ class Timeslot < ActiveRecord::Base
     self.find_by_day_and_start_time(day, Time.strptime(start_time.to_s, "%H%M"))
   end
 
+  def find_buildings
+    buildings = {}
+    self.sections.each do |section|
+      buildings[section.building] = true
+    end
+    buildings.keys
+  end
+
+  def find_building_population(building)
+    population = 0
+    self.sections.each do |section|
+      if section.building == building
+        population += section.population
+      end
+    end
+    population
+  end
 end

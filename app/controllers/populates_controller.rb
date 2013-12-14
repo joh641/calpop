@@ -2,6 +2,7 @@ class PopulatesController < ApplicationController
 
   def show
     @departments = Department.all
+    @timeslots = Timeslot.all
     if params[:query]
       add(params[:query])
     end

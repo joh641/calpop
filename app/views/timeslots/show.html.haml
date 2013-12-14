@@ -1,0 +1,18 @@
+= link_to "Back to Departments", populate_path
+%br
+= @timeslot.day
+%br
+= @timeslot.start_time
+%br
+%br
+Buildings
+%table
+  %thead
+    %tr
+      %th Building
+      %th Population
+  %tbody
+    - @timeslot.find_buildings.each do |building|
+      %tr
+        %td= building
+        %td= @timeslot.find_building_population(building)

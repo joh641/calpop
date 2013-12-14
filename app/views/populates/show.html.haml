@@ -13,3 +13,14 @@
   = label_tag :query
   = text_field_tag :query
   = submit_tag 'Add Department'
+
+%table
+  %thead
+    %tr
+      %th Day
+      %th Time
+  %tbody
+    - @timeslots.each do |timeslot|
+      %tr
+        %td= link_to "#{timeslot.day}", timeslot_path(timeslot)
+        %td= link_to "#{timeslot.start_time}", timeslot_path(timeslot)
