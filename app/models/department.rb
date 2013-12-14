@@ -28,10 +28,12 @@ class Department < ActiveRecord::Base
         begin
           department.update_courses if not query
         rescue => e
+          puts "error in multiple department creation: " + e.message
           next
         end
       end
     rescue => e
+      puts "error in department creation: " + e.message
     end
   end
 
@@ -51,12 +53,14 @@ class Department < ActiveRecord::Base
         begin
           self.courses << Course.make_course(course_number, course_uid, self.department_code)
         rescue => e
+          puts "error in multiple course creation: " + e.message
           next
         end
       end
       self.last_updated = DateTime.now
       self.save
     rescue => e
+      puts "error in course creation: " + e.message
     end
   end
 

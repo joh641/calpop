@@ -39,12 +39,14 @@ class Course < ActiveRecord::Base
         begin
           self.classinstances << Classinstance.make_class(name, class_uid, semester, year)
         rescue => e
+          puts "error in multiple class creation: " + e.message
           next
         end
       end
       self.last_updated = DateTime.now
       self.save
     rescue => e
+      puts "error in class creation: " + e.message
     end
   end
 

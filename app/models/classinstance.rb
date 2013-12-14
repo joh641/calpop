@@ -31,6 +31,7 @@ class Classinstance < ActiveRecord::Base
   # uses the class_uid to find the sections offered for that class, then adds them to the class
   def update_sections
     uri = "https://apis-dev.berkeley.edu/cxf/asws/classoffering/#{self.class_uid.gsub(" ", "%20")}?_type=xml&app_id=#{@@app_id}&app_key=#{@@app_key}"
+    puts uri
     begin
       doc = Classinstance.call_api(uri)
       sections = doc.xpath("//sections").xpath("//sectionMeetings")
@@ -47,12 +48,14 @@ class Classinstance < ActiveRecord::Base
           self.sections << Section.make_section(building, population, days, start_time, end_time, self)
         rescue => e
           i+=1
+          puts "error in multiple section creation: " + e.message
           next
         end
       end
       self.last_updated = DateTime.now
       self.save
     rescue => e
+      puts "error in section creation: " + e.message
     end
   end
 

@@ -7,7 +7,7 @@ class Section < ActiveRecord::Base
 
   # makes section from the given input, then updates the timeslots occupied by the section
   def self.make_section(building, population, days, start_time, end_time, classinstance)
-    section = find_section(building, classinstance)
+    section = self.find_section(building, classinstance)
     if not section
       section = Section.new
       section.building = building
@@ -16,20 +16,26 @@ class Section < ActiveRecord::Base
     else
       section.update_population(population)
     end
-    section.update_timeslots(days, start_time, end_time)
+    begin
+      section.update_timeslots(days, start_time, end_time)
+    rescue => e
+      puts e.message
+    end
     return section
   end
 
   def self.find_section(building, classinstance)
-    self.where("building = ?", building).each do |section|
+    self.find_all_by_building(building).each do |section|
       if section.classinstance == classinstance 
         return section
       end
     end
+    return false
   end
 
   def update_population(population)
     self.population = population
+    self.save
   end
 
   def get_section_population
