@@ -34,7 +34,7 @@ class Timeslot < ActiveRecord::Base
     population = 0
     self.sections.each do |section|
       if section.building == building
-        population += section.get_population
+        population += section.get_section_population
       end
     end
     population
