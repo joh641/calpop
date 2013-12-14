@@ -4,6 +4,8 @@
 %br
 = @timeslot.start_time.strftime("%I:%M%p")
 %br
+Population
+= @timeslot.get_timeslot_population
 %br
 Buildings
 %table

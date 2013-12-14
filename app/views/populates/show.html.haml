@@ -19,8 +19,10 @@
     %tr
       %th Day
       %th Time
+      %th Population
   %tbody
     - @timeslots.each do |timeslot|
       %tr
         %td= link_to "#{timeslot.day}", timeslot_path(timeslot)
         %td= link_to "#{timeslot.start_time.strftime("%I:%M%p")}", timeslot_path(timeslot)
+        %td= timeslot.get_timeslot_population

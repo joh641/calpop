@@ -39,4 +39,13 @@ class Timeslot < ActiveRecord::Base
     end
     population
   end
+
+  def get_timeslot_population
+    population = 0
+    self.find_buildings.each do |building|
+      population += self.find_building_population(building)
+    end
+    population
+  end
+
 end
