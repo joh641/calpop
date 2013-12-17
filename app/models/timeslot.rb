@@ -1,6 +1,9 @@
 class Timeslot < ActiveRecord::Base
 
   has_and_belongs_to_many :sections
+  scope :find_all, where("day IS NOT NULL")
+  scope :day_equals, lambda {|day| where("day = ?", day)}
+  scope :start_time_equals, lambda {|time| where("start_time = ?", time)}
 
   # makes a timeslot from the given input
   def self.make_timeslot(day, start_time)
