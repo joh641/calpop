@@ -37,4 +37,6 @@ gem 'haml-rails'
 gem 'bootstrap-sass-rails'
 gem 'font-awesome-sass'
 gem 'nokogiri'
-gem 'json_builder'
+gem 'jbuilder'
+
+gem 'swagger-ui_rails'

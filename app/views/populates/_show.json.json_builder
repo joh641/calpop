@@ -1,9 +1,0 @@
-results @timeslots do |timeslot|
-  day timeslot.day
-  time timeslot.start_time.strftime("%I:%M%p")
-  total_population timeslot.get_timeslot_population
-  buildings timeslot.find_buildings do |building|
-    building building
-    population timeslot.find_building_population(building)
-  end
-end
