@@ -7,7 +7,7 @@ density of campus at any given time or to compile statistics for each department
 
 == Using the API
 
-  /populate
+  /populate.json
   
 JSON response of all timeslots and the section population of buildings in those timeslots
 
@@ -15,10 +15,10 @@ for
 X in [Sunday, Monday, ..., Friday, Saturday]
 Y in [0000, 0030, ..., 2300, 2330]
 
-  /populate?day=X
-  /populate?start_time=Y
-  /populate?day=X&start_time=Y
-  /populate?start_time=Y&day=X
+  /populate.json?day=X
+  /populate.json?start_time=Y
+  /populate.json?day=X&start_time=Y
+  /populate.json?start_time=Y&day=X
   
 JSON response of all timeslots(with their building and section population) matching day and/or start time
 
