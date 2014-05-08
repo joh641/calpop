@@ -14,14 +14,14 @@
               "paramType": "query",
               "name": "day",
               "type": "string",
-              "description": "Day",
+              "description": "Sunday, Monday, …, Friday, Saturday",
               "required": false
             },
             {
               "paramType": "query",
               "name": "start_time",
               "type": "integer",
-              "description": "Start Time",
+              "description": "0000, 0030, …, 2300, 2330",
               "required": false
             }
           ],
